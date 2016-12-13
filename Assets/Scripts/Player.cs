@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
-public class Player : MonoBehaviour {
+public class Player : NetworkBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	[SerializeField]
+	private int maxHealth = 100;
+
+	[SyncVar]
+	private int currentHealth;
+
+	void Awake() {
+		SetDefaults ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void TakeDamage(int _amount) {
+		currentHealth -= _amount;
+
+		Debug.Log (transform.name + " now has " + currentHealth + " health.");
+	}
+
+	public void SetDefaults() {
+		currentHealth = maxHealth;
 	}
 }
