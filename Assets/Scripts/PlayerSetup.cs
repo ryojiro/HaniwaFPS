@@ -20,6 +20,13 @@ public class PlayerSetup : NetworkBehaviour {
 			if (sceneCamera != null)
 				sceneCamera.gameObject.SetActive (false);
 		}
+
+		RegisterPlayer ();
+	}
+
+	void RegisterPlayer() {
+		string _ID = "Player " + GetComponent<NetworkIdentity> ().netId;
+		transform.name = _ID;
 	}
 
 	void AssignRemoteLayer() {
