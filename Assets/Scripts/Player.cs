@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 using System.Collections;
 
 public class Player : NetworkBehaviour {
@@ -14,9 +13,6 @@ public class Player : NetworkBehaviour {
 
 	[SerializeField]
 	private int maxHealth = 3;
-
-	[SerializeField]
-	private GameObject objHaniwa;
 
 	[SerializeField]
 	private GameObject[] hp;
@@ -49,9 +45,8 @@ public class Player : NetworkBehaviour {
 		if (isDead) return;
 
 		currentHealth -= _amount;
-		Debug.Log (currentHealth);
-		Debug.Log (hp[currentHealth-1]);
-		hp [currentHealth - 1].SetActive (false);
+
+		hp [currentHealth].SetActive(false);
 
 		Debug.Log (transform.name + " now has " + currentHealth + " health.");
 
@@ -68,7 +63,7 @@ public class Player : NetworkBehaviour {
 		Collider _col = GetComponent<Collider>();
 		if(_col != null)
 			_col.enabled = false;
-		objHaniwa.SetActive (false);
+
 		Debug.Log (transform.name + " is DEAD!");
 
 		StartCoroutine (Respawn());
@@ -86,13 +81,13 @@ public class Player : NetworkBehaviour {
 	public void SetDefaults() {
 		isDead = false;
 		currentHealth = maxHealth;
-		for(int n = 0; n < hp.Length; n++){
-			hp[n].SetActive (true);
-		}
 		for (int i = 0; i < disableOnDeath.Length; i++) {
 			disableOnDeath [i].enabled = wasEnabled [i];
 		}
-		objHaniwa.SetActive (true);
+
+		for (int i = 0; i < 3; i++) {
+			hp [i].SetActive(true);
+		}
 
 		Collider _col = GetComponent<Collider>();
 		if(_col != null)
