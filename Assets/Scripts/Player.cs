@@ -27,6 +27,8 @@ public class Player : NetworkBehaviour {
 	[SerializeField]
 	private AudioSource bgm;
 
+	[SerializeField]
+	private GameObject haniwaView;
 
 	public void Setup() {
 		bgm.Play ();
@@ -62,6 +64,8 @@ public class Player : NetworkBehaviour {
 	private void Die() {
 
 		bgm.Stop ();
+		haniwaView.SetActive (false);
+
 		isDead = true;
 
 		for (int i = 0; i < disableOnDeath.Length; i++) {
@@ -86,6 +90,8 @@ public class Player : NetworkBehaviour {
 	}
 
 	public void SetDefaults() {
+		haniwaView.SetActive (true);
+
 		isDead = false;
 		currentHealth = maxHealth;
 		for (int i = 0; i < disableOnDeath.Length; i++) {
