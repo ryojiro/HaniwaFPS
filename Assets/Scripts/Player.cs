@@ -30,6 +30,9 @@ public class Player : NetworkBehaviour {
 	[SerializeField]
 	private GameObject haniwaView;
 
+	[SerializeField]
+	private GameObject damageFillter;
+
 	public void Setup() {
 		bgm.Play ();
 		wasEnabled = new bool[disableOnDeath.Length];
@@ -54,6 +57,7 @@ public class Player : NetworkBehaviour {
 		currentHealth -= _amount;
 
 		hp [currentHealth].SetActive(false);
+		damageFilter();
 
 		Debug.Log (transform.name + " now has " + currentHealth + " health.");
 
@@ -105,5 +109,11 @@ public class Player : NetworkBehaviour {
 		Collider _col = GetComponent<Collider>();
 		if(_col != null)
 			_col.enabled = true;
+	}
+
+	/// <summary>ダメージフィルタ制御</summary>
+	public void damageFilter()
+	{
+		damageFillter.SetActive (true);
 	}
 }
