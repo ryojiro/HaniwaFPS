@@ -49,6 +49,8 @@ public class Player : NetworkBehaviour {
 		if (isDead) return;
 
 		currentHealth -= _amount;
+		Debug.Log (currentHealth);
+		Debug.Log (hp[currentHealth-1]);
 		hp [currentHealth - 1].SetActive (false);
 
 		Debug.Log (transform.name + " now has " + currentHealth + " health.");
