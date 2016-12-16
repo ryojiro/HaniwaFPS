@@ -13,6 +13,9 @@ public class PlayerShoot : NetworkBehaviour {
 	[SerializeField]
 	private LayerMask mask;
 
+	[SerializeField]
+	private AudioSource shootSound;
+
 	void Start () {
 		if (cam == null) {
 			Debug.LogError ("PlayerShoot: No Camera referenced!");
@@ -28,6 +31,7 @@ public class PlayerShoot : NetworkBehaviour {
 
 	[Client]
 	void Shoot() {
+		shootSound.Play ();
 		RaycastHit _hit;
 		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask)) {
 			if (_hit.collider.tag == PLAYER_TAG)

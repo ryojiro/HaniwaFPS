@@ -24,7 +24,12 @@ public class Player : NetworkBehaviour {
 	private Behaviour[] disableOnDeath;
 	private bool[] wasEnabled;
 
+	[SerializeField]
+	private AudioSource bgm;
+
+
 	public void Setup() {
+		bgm.Play ();
 		wasEnabled = new bool[disableOnDeath.Length];
 		for (int i = 0; i < wasEnabled.Length; i++) {
 			wasEnabled [i] = disableOnDeath [i].enabled;
@@ -55,6 +60,8 @@ public class Player : NetworkBehaviour {
 	}
 
 	private void Die() {
+
+		bgm.Stop ();
 		isDead = true;
 
 		for (int i = 0; i < disableOnDeath.Length; i++) {
