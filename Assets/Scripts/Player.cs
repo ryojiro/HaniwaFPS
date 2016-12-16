@@ -26,9 +26,12 @@ public class Player : NetworkBehaviour {
 
 	[SerializeField]
 	private AudioSource bgm;
-
+	
 	[SerializeField]
 	private GameObject haniwaView;
+
+	[SerializeField]
+	private GameObject[] damagedEffect;
 
 	[SerializeField]
 	private GameObject damageFillter;
@@ -49,6 +52,10 @@ public class Player : NetworkBehaviour {
 		currentHealth -= _amount;
 
 		hp [currentHealth].SetActive(false);
+		if (currentHealth == 2)
+			damagedEffect [2].SetActive (true);
+		else if (currentHealth == 1)
+			damagedEffect [1].SetActive (true);
 		damageFilter();
 
 		Debug.Log (transform.name + " now has " + currentHealth + " health.");
@@ -61,6 +68,7 @@ public class Player : NetworkBehaviour {
 
 		bgm.Stop ();
 		haniwaView.SetActive (false);
+		damagedEffect [0].SetActive (true);
 
 		isDead = true;
 
@@ -97,7 +105,9 @@ public class Player : NetworkBehaviour {
 
 		for (int i = 0; i < 3; i++) {
 			hp [i].SetActive(true);
+			damagedEffect [i].SetActive (false);
 		}
+		damagedEffect [0].SetActive (false);
 
 		Collider _col = GetComponent<Collider>();
 		if(_col != null)
