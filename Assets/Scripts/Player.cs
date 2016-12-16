@@ -34,20 +34,12 @@ public class Player : NetworkBehaviour {
 	private GameObject damageFillter;
 
 	public void Setup() {
-		bgm.Play ();
 		wasEnabled = new bool[disableOnDeath.Length];
 		for (int i = 0; i < wasEnabled.Length; i++) {
 			wasEnabled [i] = disableOnDeath [i].enabled;
 		}
 		SetDefaults ();
 	}
-
-//	public void Update() {
-//		if(!isLocalPlayer) return;
-//		if (Input.GetKeyDown (KeyCode.K)) {
-//			RpcTakeDamage (1000);
-//		}
-//	}
 
 	[ClientRpc]
 	public void RpcTakeDamage(int _amount) {
@@ -95,6 +87,7 @@ public class Player : NetworkBehaviour {
 
 	public void SetDefaults() {
 		haniwaView.SetActive (true);
+		bgm.Play ();
 
 		isDead = false;
 		currentHealth = maxHealth;
