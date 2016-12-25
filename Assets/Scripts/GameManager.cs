@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 
 	void Awake() {
 		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 		if (instance != null)
 			Debug.LogError ("More than one GameManager in scene.");
 		else
